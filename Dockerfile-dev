@@ -1,0 +1,11 @@
+FROM golang:1.13-alpine AS builder
+RUN apk add --no-cache \
+    build-base \
+    ca-certificates \
+    git \
+    protobuf \
+ && go get -u github.com/golang/protobuf/protoc-gen-go
+ENV PROJECT github.com/tony-yang/gcp-cloud-native-stack
+WORKDIR /go/src/$PROJECT
+
+ENV CGO_ENABLED 0
