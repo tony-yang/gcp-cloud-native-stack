@@ -27,6 +27,7 @@ A few selected services from the GCP microservices demo app are used to build th
 # Dev Guide
 Use the `Dockerfile-dev` container image (an alpine base image) for developing and testing the app. It has the `cgo enabled` environment variable so that we can run `go test`.
 ```
+docker build -t go-dev-alpine -f Dockerfile-dev .
 docker run -itd --rm -v /<path to>/gcp-cloud-native-stack:/go/src/github.com/tony-yang/gcp-cloud-native-stack go-dev-alpine
 ```
 
