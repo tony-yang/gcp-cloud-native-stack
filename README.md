@@ -4,25 +4,13 @@ An experimental repo building demo cloud native app using the Google cloud stack
 A few selected services from the GCP microservices demo app are used to build this app for learning purpose. Each component below is a microservice. All components are made to be standalone.
 
 ### Catalog
-
-
-### Recommendation Engine
-
+Provides a list of products.
 
 ### Frontend
+Exposes an HTTP server to serve the website.
 
-
-### Checkout
-
-
-### Shipping
-
-
-### Email
-
-
-### Loadgen
-
+### Recommendation Engine
+Recommends other products.
 
 # Dev Guide
 Use the `Dockerfile-dev` container image (an alpine base image) for developing and testing the app. It has the `cgo enabled` environment variable so that we can run `go test`.

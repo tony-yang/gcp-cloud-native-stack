@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog
+spec:
+  selector:
+    matchLabels:
+      app: catalog
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: server
+          image: catalog
+          ports:
+            - containerPort: 12000
+          env:
+            - name: PORT
+              value: "12000"
+          readinessProbe:
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:12000"]
+          livenessProbe:
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:12000"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+spec:
+  type: NodePort
+  selector:
+    app: catalog
+  ports:
+    - name: grpc
+      port: 12000
+      targetPort: 12000

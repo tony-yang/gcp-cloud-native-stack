@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: gcp-cloud-native-stack
+build:
+  artifacts:
+  - image: catalog
+    context: catalog
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes-manifests/catalog.yaml
