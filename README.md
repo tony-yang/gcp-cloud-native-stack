@@ -23,6 +23,13 @@ Within each component, run `make test` to start the unit test and `make build` t
 
 Run `make cover` to run the unit test with coverage report breakdown by function.
 
+To run the entire app and all the pods, we use `skaffold dev`. This will watch for any changes and automatically redeploy.
+```
+skaffold dev --port-forward
+```
+
+Then, visit `localhost:13000` to see the frontend UI in action.
+
 # Design Principles
 - This app can be run locally (k8s on Docker) or on GCP without any modification.
 - This app will mimic the regular dev flow, init, test, run, and deploy locally for fast iteration, and can use the same pipeline to deploy to prod.

@@ -18,4 +18,4 @@ fmt:
 	gofmt -s -w .
 
 build: update-proto fmt
-	go build -o /catalog .
+	go build -o /frontend .

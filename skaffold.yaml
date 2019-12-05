@@ -6,7 +6,9 @@ build:
   artifacts:
   - image: catalog
     context: catalog
+  - image: frontend
+    context: frontend
 deploy:
   kubectl:
     manifests:
-    - kubernetes-manifests/catalog.yaml
+    - kubernetes-manifests/**.yaml
