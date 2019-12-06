@@ -1,0 +1,12 @@
+FROM python:3.8-slim
+RUN apt-get update -qy \
+ && apt-get -qy install \
+    build-essential \
+    g++ \
+    wget \
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install --upgrade grpcio grpcio-tools
+
+ENV PYTHONUNBUFFERED=0
+ENV PROJECT github.com/tony-yang/gcp-cloud-native-stack
+WORKDIR /go/src/$PROJECT
