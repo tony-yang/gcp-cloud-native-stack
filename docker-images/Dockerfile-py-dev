@@ -5,7 +5,7 @@ RUN apt-get update -qy \
     g++ \
     wget \
  && rm -rf /var/lib/apt/lists/* \
- && pip install --upgrade grpcio grpcio-tools
+ && pip install --upgrade grpcio grpcio-tools pip-tools
 
 ENV PYTHONUNBUFFERED=0
 ENV PROJECT github.com/tony-yang/gcp-cloud-native-stack

@@ -18,8 +18,9 @@ message Money {
   int32 nanos = 3;
 }
 
-
+// ===============
 // Product Catalog
+// ===============
 service ProductCatalogService {
   rpc ListProducts(Empty) returns (ListProductsResponse) {}
   rpc GetProduct(GetProductRequest) returns (Product) {}
@@ -49,4 +50,20 @@ message SearchProductsRequest {
 
 message SearchProductsResponse {
   repeated Product results = 1;
+}
+
+// ======================
+// Recommendation Service
+// ======================
+service RecommendationService {
+  rpc ListRecommendations(ListRecommendationsRequest) returns (ListRecommendationsResponse) {}
+}
+
+message ListRecommendationsRequest {
+  string user_id = 1;
+  repeated string product_ids = 2;
+}
+
+message ListRecommendationsResponse {
+  repeated string product_ids = 1;
 }

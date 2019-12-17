@@ -13,11 +13,16 @@ Exposes an HTTP server to serve the website.
 Recommends other products.
 
 # Dev Guide
-Use the `Dockerfile-dev` container image (an alpine base image) for developing and testing the app. It has the `cgo enabled` environment variable so that we can run `go test`.
+Use the `Dockerfile-<lang>-dev` container image for developing and testing the app. The `Dockerfile-go-dev` has the `cgo enabled` environment variable so that we can run `go test`.
+
+To run the Go dev environment
 ```
-docker build -t go-dev-alpine -f Dockerfile-dev .
+cd docker-images
+docker build -t go-dev-alpine -f Dockerfile-go-dev .
 docker run -itd --rm -v /<path to>/gcp-cloud-native-stack:/go/src/github.com/tony-yang/gcp-cloud-native-stack go-dev-alpine
 ```
+
+Use similar step to run the Python dev environment. Just use the `Dockerfile-py-dev` image.
 
 Within each component, run `make test` to start the unit test and `make build` to update the generated proto, fetch and update go modules, and build the packages.
 

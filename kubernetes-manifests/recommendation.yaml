@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendation
+spec:
+  selector:
+    matchLabels:
+      app: recommendation
+  template:
+    metadata:
+      labels:
+        app: recommendation
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: server
+          image: recommendation
+          ports:
+            - containerPort: 14000
+          readinessProbe:
+            periodSeconds: 5
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:14000"]
+          livenessProbe:
+            periodSeconds: 5
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:14000"]
+          env:
+            - name: PORT
+              value: "14000"
+            - name: CATALOG_ADDR
+              value: "catalog:12000"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendation
+spec:
+  type: ClusterIP
+  selector:
+    app: recommendation
+  ports:
+    - name: grpc
+      port: 14000
+      targetPort: 14000
