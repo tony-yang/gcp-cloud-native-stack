@@ -29,6 +29,9 @@ type ctxKeySessionID struct{}
 type frontendServer struct {
 	catalogAddr string
 	catalogConn *grpc.ClientConn
+
+	recommendationAddr string
+	recommendationConn *grpc.ClientConn
 }
 
 func mapEnv(target *string, envKey string) error {
@@ -66,8 +69,17 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if err := mapEnv(&svc.recommendationAddr, "RECOMMENDATION_ADDR"); err != nil {
+		log.Fatalf("failed to map component address %q to environment variable: %v", svc.recommendationAddr, err)
+	}
+	if err := connGRPC(ctx, &svc.recommendationConn, svc.recommendationAddr); err != nil {
+		log.Fatal(err)
+	}
+
 	r := mux.NewRouter()
 	r.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
+	r.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
+
 	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
 	r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 

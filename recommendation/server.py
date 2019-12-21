@@ -17,7 +17,7 @@ logger = getJSONLogger('server')
 class RecommendationService(app_pb2_grpc.RecommendationServiceServicer):
     def ListRecommendations(self, request, context):
         max_responses = 5
-        response = catalog_stub.ListProducts(ap_pb2.Empty())
+        response = catalog_stub.ListProducts(app_pb2.Empty())
         product_ids = [x.id for x in response.products]
         filtered_products = list(set(product_ids)-set(request.product_ids))
         num_products = len(filtered_products)

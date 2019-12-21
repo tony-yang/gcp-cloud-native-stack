@@ -37,6 +37,8 @@ spec:
               value: "13000"
             - name: CATALOG_ADDR
               value: "catalog:12000"
+            - name: RECOMMENDATION_ADDR
+              value: "recommendation:14000"
           resources:
             requests:
               cpu: 100m
