@@ -4,24 +4,53 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-cachetools==3.1.1         # via google-auth
-certifi==2019.11.28       # via requests
-chardet==3.0.4            # via requests
+cachetools==3.1.1
+    # via google-auth
+certifi==2019.11.28
+    # via requests
+chardet==3.0.4
+    # via requests
 google-api-core==1.14.3
-google-auth==1.8.2        # via google-api-core
-googleapis-common-protos==1.6.0  # via google-api-core
+    # via -r requirements.in
+google-auth==1.8.2
+    # via google-api-core
+googleapis-common-protos==1.6.0
+    # via google-api-core
 grpcio-health-checking==1.24.3
+    # via -r requirements.in
 grpcio==1.25.0
-idna==2.8                 # via requests
-protobuf==3.11.1          # via google-api-core, googleapis-common-protos, grpcio-health-checking
-pyasn1-modules==0.2.7     # via google-auth
-pyasn1==0.4.8             # via pyasn1-modules, rsa
+    # via
+    #   -r requirements.in
+    #   grpcio-health-checking
+idna==2.8
+    # via requests
+protobuf==3.11.1
+    # via
+    #   google-api-core
+    #   googleapis-common-protos
+    #   grpcio-health-checking
+pyasn1-modules==0.2.7
+    # via google-auth
+pyasn1==0.4.8
+    # via
+    #   pyasn1-modules
+    #   rsa
 python-json-logger==0.1.11
-pytz==2019.3              # via google-api-core
-requests==2.22.0          # via google-api-core
-rsa==4.0                  # via google-auth
-six==1.13.0               # via google-api-core, google-auth, grpcio, protobuf
-urllib3==1.25.7           # via requests
+    # via -r requirements.in
+pytz==2019.3
+    # via google-api-core
+requests==2.22.0
+    # via google-api-core
+rsa==4.0
+    # via google-auth
+six==1.13.0
+    # via
+    #   google-api-core
+    #   google-auth
+    #   grpcio
+    #   protobuf
+urllib3==1.25.8
+    # via requests
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
